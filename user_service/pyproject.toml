@@ -1,0 +1,16 @@
+[project]
+name = "user-service"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.16.5",
+    "asyncmy>=0.2.10",
+    "cryptography>=45.0.7",
+    "grpc-interceptor>=0.15.4",
+    "grpcio>=1.74.0",
+    "grpcio-tools>=1.74.0",
+    "passlib>=1.7.4",
+    "sqlalchemy-serializer>=1.4.12",
+    "sqlalchemy[asyncio]>=2.0.43",
+]

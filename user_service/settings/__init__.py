@@ -1,0 +1,12 @@
+MYSQL_HOST = 'localhost'
+MYSQL_PORT = 3306
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'root'
+MYSQL_DB = 'jiegou'
+
+DB_URL=f"mysql+asyncmy://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset=UTF8MB4"
+
+# 数据中心ID
+DATACENTER_ID = 0
+# 机器ID
+WORKER_ID = 0
