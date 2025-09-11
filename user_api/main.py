@@ -1,0 +1,21 @@
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from loguru import logger
+from starlette.middleware.base import BaseHTTPMiddleware
+
+from hooks.lifespan import lifespan
+from hooks.middlewares import log_middleware
+from routers import user
+app = FastAPI(
+    lifespan=lifespan
+)
+
+app.add_middleware(BaseHTTPMiddleware, dispatch=log_middleware)
+
+app.include_router(user.router)
+
+
+if __name__ == '__main__':
+    load_dotenv()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
