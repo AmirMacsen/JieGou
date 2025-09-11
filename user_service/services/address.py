@@ -14,7 +14,6 @@ class AddressService(address_pb2_grpc.AddressServicer):
             mobile = request.mobile
             region  = request.region
             detail = request.detail
-
             try:
                 address = Address(
                     realname=realname,
