@@ -14,7 +14,7 @@ def generate_username():
 
 class User(Base, SerializerMixin):
     __tablename__ = 'users'
-    serialize_rules = ("-password",)
+    serialize_only = ("id", "username", "mobile", "avatar", "is_activate", "is_staff")
     id = Column(BigInteger, primary_key=True, default=generate_id)
     mobile = Column(String(20), unique=True, index=True)
     username = Column(String(20),default=generate_username)

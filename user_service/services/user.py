@@ -113,7 +113,7 @@ class UserService(user_pb2_grpc.UserServiceServicer):
         async with session.begin():
             user_id = request.id
             username = request.username
-            stmt = update(User).where(User.id == user_id).values(username=user_id)
+            stmt = update(User).where(User.id == user_id).values(username=username)
             result = await session.execute(stmt)
 
         row_count = result.rowcount
