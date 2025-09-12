@@ -4,7 +4,7 @@ MYSQL_USER = 'root'
 MYSQL_PASSWORD = 'root'
 MYSQL_DB = 'jiegou_user'
 
-DB_URL=f"mysql+asyncmy://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset=UTF8MB4"
+DB_URL=f"mysql+aiomysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset=UTF8MB4"
 
 # 数据中心ID
 DATACENTER_ID = 0
