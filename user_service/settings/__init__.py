@@ -2,7 +2,7 @@ MYSQL_HOST = 'localhost'
 MYSQL_PORT = 3306
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = 'root'
-MYSQL_DB = 'jiegou'
+MYSQL_DB = 'jiegou_user'
 
 DB_URL=f"mysql+asyncmy://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset=UTF8MB4"
 
