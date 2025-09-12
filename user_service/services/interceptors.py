@@ -3,6 +3,7 @@ from typing import Any,Callable
 import grpc
 from grpc_interceptor.exceptions import GrpcException
 from grpc_interceptor.server import AsyncServerInterceptor
+from loguru import logger
 
 from models import AsyncSessionFactory
 
@@ -17,6 +18,7 @@ class UserInterceptor(AsyncServerInterceptor):
         try:
             session = AsyncSessionFactory()
             response = await method(request_or_iterator, context, session)
+            await logger.complete()
             return response
         except GrpcException as e:
             await context.set_code(e.status_code)

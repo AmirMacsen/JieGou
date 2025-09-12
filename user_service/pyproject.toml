@@ -10,7 +10,9 @@ dependencies = [
     "grpc-interceptor>=0.15.4",
     "grpcio>=1.74.0",
     "grpcio-tools>=1.74.0",
+    "loguru>=0.7.3",
     "passlib>=1.7.4",
+    "py-consul>=1.6.0",
     "sqlalchemy-serializer>=1.4.12",
     "sqlalchemy[asyncio]>=2.0.43",
 ]
