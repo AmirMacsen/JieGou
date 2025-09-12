@@ -5,11 +5,13 @@ description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
     "asgiref>=3.9.1",
+    "dnspython>=2.8.0",
     "fastapi>=0.116.1",
     "grpcio>=1.74.0",
     "grpcio-tools>=1.74.0",
     "loguru>=0.7.3",
     "oss2>=2.19.1",
+    "py-consul>=1.6.0",
     "pyjwt>=2.10.1",
     "python-dotenv>=1.1.1",
     "python-multipart>=0.0.20",

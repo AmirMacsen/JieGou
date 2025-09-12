@@ -15,7 +15,9 @@ def grpc_error_handler(func):
         except grpc.RpcError as e:
             logger.error(e)
             raise HTTPException(status_code=get_http_code(e.code()), detail=e.details())
-        except:
+        except Exception as e:
+            import traceback
+            logger.error(traceback.format_exc())
             logger.error("请求异常")
-            return HTTPException(status_code=500, detail="服务器内部错误")
+            raise HTTPException(status_code=500, detail="服务器内部错误")
     return  wrapper

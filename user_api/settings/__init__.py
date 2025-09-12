@@ -3,3 +3,12 @@ from datetime import timedelta
 JWT_SECRET_KEY = "DSKDFMNCVHAOQQWERNSJKDFHM"
 JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=2)
 JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=7)
+
+
+# consul
+CONSUL_HOST='127.0.0.1'
+CONSUL_PORT=8500
+CONSUL_DNS_PORT=8600
+
+# server
+SERVER_PORT=8000

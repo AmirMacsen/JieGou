@@ -14,3 +14,28 @@ class UpdatePasswordModel(BaseModel):
 
 class UpdateAvatarModel(BaseModel):
     avatar: str
+
+
+class CreateAddressModel(BaseModel):
+    realname: str
+    mobile: str
+    region: str
+    detail: str
+
+class AddressModel(BaseModel):
+    id: str
+    realname: str
+    mobile: str
+    region: str
+    detail: str
+
+class DeleteAddressModel(BaseModel):
+    id: str
+
+class UpdateAddressModel(BaseModel):
+    id: str
+    realname: str
+    mobile: str
+    region: str
+    detail: str
+
