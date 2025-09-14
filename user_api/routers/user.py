@@ -37,6 +37,9 @@ async def login(data: LoginModel):
     else:
         user = await user_service_client.get_or_create_user_by_mobile(mobile)
         tokens = auth_handler.encode_login_token(user.id)
+        # 单点登录 1. 删除刷新令牌 2.存储最新的刷新令牌
+        await TllRedis().delete_refresh_token(user.id)
+        await TllRedis().set_refresh_token(user.id, tokens["refresh_token"])
         return {
             "user": user,
             "access_token": tokens["access_token"],
@@ -61,7 +64,7 @@ async def update_password(data: UpdatePasswordModel, user_id: int = Depends(auth
     return ResponseModel()
 
 
-@router.put("/update/avatar", response_model=UpdatedAvatarModel)
+@router.post("/update/avatar", response_model=UpdatedAvatarModel)
 async def update_avatar(file: UploadFile, user_id: int = Depends(auth_handler.auth_access_dependency)):
     from utils.alyoss import oss_upload_image
     file_url = await oss_upload_image(file)
@@ -75,4 +78,10 @@ async def update_avatar(file: UploadFile, user_id: int = Depends(auth_handler.au
 async def get_mine_info(user_id: int = Depends(auth_handler.auth_access_dependency)):
     user = await user_service_client.get_user_by_id(user_id)
     return user
+
+
+@router.post("/logout", response_model=ResponseModel)
+async def logout(user_id: int = Depends(auth_handler.auth_access_dependency)):
+    await TllRedis().delete_refresh_token(user_id)
+    return ResponseModel()
 

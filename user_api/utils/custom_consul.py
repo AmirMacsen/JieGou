@@ -57,7 +57,7 @@ class SingletonConsul(metaclass=SingletonMeta):
             address=self.host,
             port=self.port,
             tags=["user", "http"],
-            check=consul.Check.http(url=f"http://{self.host}:{self.port}/health", interval="10s")
+            check=consul.Check.http(url=f"http://{self.host}:{self.port}/health", interval="60s")
         )
 
     def deregister_consul(self):

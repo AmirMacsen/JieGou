@@ -1,18 +1,28 @@
 import grpc
+from fastapi import HTTPException
 
 from protos import address_pb2_grpc, address_pb2
 from services.decorators import grpc_error_handler
+from utils.custom_consul import SingletonConsul
 from utils.single import SingletonMeta
 
+jiegou_consul = SingletonConsul()
 
 class AddressStub:
-    def __init__(self):
-        self.address_service_addr = "localhost:5001"
+    @property
+    def user_service_address(self):
+        data = jiegou_consul.get_user_service_address()
+        if data:
+            host, port = data
+            return f"{host}:{port}"
+        else:
+            raise HTTPException(status_code=500, detail="用户服务未找到")
+
 
     async def __aenter__(self):
-        self.channel = grpc.aio.insecure_channel(self.address_service_addr)
-        stub = address_pb2_grpc.AddressStub(self.channel)
-        return stub
+            self.channel = grpc.aio.insecure_channel(self.user_service_address)
+            stub = address_pb2_grpc.AddressStub(self.channel)
+            return stub
 
     async def __aexit__(self, exc_type, exc, tb):
         await self.channel.close()

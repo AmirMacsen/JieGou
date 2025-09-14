@@ -1,8 +1,12 @@
 import redis.asyncio as redis
+
+import settings
 from .single import SingletonMeta
 
 class TllRedis(metaclass=SingletonMeta):
     SMS_CODE_PREFIX = "sms_code_"
+    REFRESH_TOKEN_PREFIX = "refresh_token_"
+
     def __init__(self):
         self.client = redis.Redis(host='localhost', port=6379, db=0)
 
@@ -18,11 +22,26 @@ class TllRedis(metaclass=SingletonMeta):
             return value
 
 
+    async def delete(self, key):
+        await self.client.delete(key)
+
+
     async def set_sms_code(self, mobile, code):
         await self.set(f"{self.SMS_CODE_PREFIX}{mobile}", code)
 
     async def get_sms_code(self, mobile):
         return await self.get(f"{self.SMS_CODE_PREFIX}{mobile}")
+
+    async def set_refresh_token(self, user_id, refresh_token):
+        await self.set(f"{self.REFRESH_TOKEN_PREFIX}{user_id}", refresh_token,
+                       ex=settings.JWT_REFRESH_TOKEN_EXPIRES)
+
+    async def get_refresh_token(self, user_id):
+        return await self.get(f"{self.REFRESH_TOKEN_PREFIX}{user_id}")
+
+    async def delete_refresh_token(self, user_id):
+        await self.delete(f"{self.REFRESH_TOKEN_PREFIX}{user_id}")
+
     async def close(self):
         await self.client.aclose()
 
