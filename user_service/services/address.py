@@ -77,7 +77,7 @@ class AddressService(address_pb2_grpc.AddressServicer):
             page = request.page
             size = request.size
             offset = (page - 1) * size
-            result = await session.execute(select(Address).where(Address.user_id == user_id).limit(size).offset(offset))
+            result = await session.execute(select(Address).where(Address.user_id == user_id).limit(size).offset(offset).order_by(Address.id.desc()))
             rows = result.scalars()
         addresses = []
         for row in rows:
