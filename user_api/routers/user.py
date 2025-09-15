@@ -4,7 +4,7 @@ import string
 from fastapi import APIRouter, HTTPException, Depends, UploadFile
 from loguru import logger
 
-from schemas.request import LoginModel, UpdateUsernameModel, UpdatePasswordModel, UpdateAvatarModel
+from schemas.request import LoginModel, UpdateUsernameModel, UpdatePasswordModel, UpdateAvatarModel, LoginWithPwdModel
 from schemas.response import ResponseModel, LoginResponseModel, UserModel, UpdatedAvatarModel
 from services.user import UserServiceClient
 from utils.auth import AuthHandler
@@ -84,4 +84,21 @@ async def get_mine_info(user_id: int = Depends(auth_handler.auth_access_dependen
 async def logout(user_id: int = Depends(auth_handler.auth_access_dependency)):
     await TllRedis().delete_refresh_token(user_id)
     return ResponseModel()
+
+@router.post("/login/with/pwd", response_model=LoginResponseModel)
+async def login_with_pwd(data:LoginWithPwdModel):
+    mobile = data.mobile
+    password = data.password
+
+    # 验证用户账号密码是否正确
+    user = await user_service_client.verify_user(mobile,password)
+    if user is None:
+        raise HTTPException(status_code=400, detail="用户名或密码错误")
+    tokens = auth_handler.encode_login_token(user.id)
+    await TllRedis().set_refresh_token(user.id, tokens["refresh_token"])
+    return {
+        "user": user,
+        "access_token": tokens["access_token"],
+        "refresh_token": tokens["refresh_token"]
+    }
 

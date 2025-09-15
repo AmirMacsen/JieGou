@@ -39,3 +39,7 @@ class UpdateAddressModel(BaseModel):
     region: str
     detail: str
 
+class LoginWithPwdModel(BaseModel):
+    mobile: str
+    password: str
+
