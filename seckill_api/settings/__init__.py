@@ -1,0 +1,24 @@
+MYSQL_HOST = 'localhost'
+MYSQL_PORT = 3306
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'root'
+MYSQL_DB = 'jiegou_seckill'
+
+DB_URL=f"mysql+aiomysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset=UTF8MB4"
+
+# jwt
+JWT_SECRET_KEY = "DSKDFMNCVHAOQQWERNSJKDFHM"
+
+# 数据中心ID
+DATACENTER_ID = 0
+# 机器ID
+WORKER_ID = 2
+
+# alipay
+ALIPAY_APP_ID=9021000153641664
+
+# fastapi server 端口
+SERVER_PORT = 8001
+
+# kafka
+KAFKA_SERVER = '192.168.3.4:9092'

@@ -1,0 +1,22 @@
+[project]
+name = "seckill-api"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "aiofiles>=24.1.0",
+    "aiomysql>=0.2.0",
+    "alembic>=1.16.5",
+    "asyncmy>=0.2.10",
+    "fastapi>=0.116.1",
+    "grpcio>=1.74.0",
+    "grpcio-tools>=1.74.0",
+    "kafka-python>=2.2.15",
+    "loguru>=0.7.3",
+    "pyjwt>=2.10.1",
+    "python-alipay-sdk>=3.3.0",
+    "redis[hiredis]>=6.4.0",
+    "sqlalchemy-serializer>=1.4.12",
+    "sqlalchemy[asyncio]>=2.0.43",
+    "uvicorn>=0.35.0",
+]
